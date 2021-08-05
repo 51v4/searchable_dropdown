@@ -460,7 +460,7 @@ class _SelectionWidgetState<T> extends State<SelectionWidget<T>> {
           widget.popupTitle ?? const SizedBox.shrink(),
           if (widget.showSearchBox)
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(20.0),
               child: TextField(
                 style: widget.searchFieldProps?.style,
                 controller: widget.searchFieldProps?.controller,
