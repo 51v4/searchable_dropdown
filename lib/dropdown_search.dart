@@ -40,7 +40,7 @@ typedef Future<bool?> BeforeChangeMultiSelection<T>(
     List<T> prevItems, List<T> nextItems);
 typedef Widget FavoriteItemsBuilder<T>(BuildContext context, T item);
 typedef Widget ValidationMultiSelectionBuilder<T>(
-    BuildContext context, List<T> item);
+    BuildContext context, List<T> item, VoidCallback onValidate);
 
 typedef void OnItemAdded<T>(List<T> selectedItem, T addedItem);
 typedef void OnItemRemoved<T>(List<T> selectedItem, T removedItem);
