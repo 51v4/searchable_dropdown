@@ -232,16 +232,13 @@ class _SelectionWidgetState<T> extends State<SelectionWidget<T>> {
   Widget _multiSelectionValidation() {
     if (!widget.isMultiSelectionMode) return Container();
 
-    final onValidate = () {
+    final VoidCallback onValidate = () {
       Navigator.pop(context);
       if (widget.onChanged != null) widget.onChanged!(_selectedItems);
     };
     if (widget.popupValidationMultiSelectionWidget != null)
-      return InkWell(
-        child: widget.popupValidationMultiSelectionWidget!(
-            context, _selectedItems),
-        onTap: onValidate,
-      );
+      return widget.popupValidationMultiSelectionWidget!(
+          context, _selectedItems, onValidate);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
