@@ -425,7 +425,8 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
         : _itemToList(widget.selectedItem);
     
     if (!listEquals(oldWidget.items, widget.items)) {
-      if (!widget.items.contains(_selectedItemsNotifier.value)) {
+      if (!_selectedItemsNotifier.value
+          .every((element) => widget.items?.contains(element) ?? false)) {
         _selectedItemsNotifier.value = [];
       }
     }
