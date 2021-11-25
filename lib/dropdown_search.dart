@@ -251,6 +251,9 @@ class DropdownSearch<T> extends StatefulWidget {
   /// elevation for popup items
   final double popupElevation;
 
+  ///any object
+  final T? anyObject;
+
   DropdownSearch({
     Key? key,
     this.onSaved,
@@ -307,6 +310,7 @@ class DropdownSearch<T> extends StatefulWidget {
     this.dropdownSearchTextAlign,
     this.dropdownSearchTextAlignVertical,
     this.popupElevation = 8,
+    this.anyObject,
   })  : assert(!showSelectedItems || T == String || compareFn != null),
         this.searchFieldProps = searchFieldProps ?? TextFieldProps(),
         this.isMultiSelectionMode = false,
@@ -382,6 +386,7 @@ class DropdownSearch<T> extends StatefulWidget {
     this.popupSelectionWidget,
     this.popupValidationMultiSelectionWidget,
     this.popupElevation = 8,
+    this.anyObject,
   })  : assert(!showSelectedItems || T == String || compareFn != null),
         this.searchFieldProps = searchFieldProps ?? TextFieldProps(),
         this.onChangedMultiSelection = onChange,
@@ -794,6 +799,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       popupValidationMultiSelectionWidget:
           widget.popupValidationMultiSelectionWidget,
       isMultiSelectionMode: isMultiSelectionMode,
+      anyObject: widget.anyObject,
     );
   }
 
