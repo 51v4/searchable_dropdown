@@ -33,6 +33,15 @@ class _CheckBoxWidgetState extends State<CheckBoxWidget> {
   }
 
   @override
+  void didUpdateWidget(CheckBoxWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // print(widget.isChecked);
+    if (oldWidget.isChecked != widget.isChecked) {
+      isCheckedNotifier.value = widget.isChecked;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
         valueListenable: isCheckedNotifier,
