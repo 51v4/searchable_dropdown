@@ -75,6 +75,9 @@ class SelectionWidget<T> extends StatefulWidget {
   ///widget used to validate items in multiSelection mode
   final ValidationMultiSelectionBuilder<T>? popupValidationMultiSelectionWidget;
 
+  ///any object
+  final T? anyObject;
+
   const SelectionWidget({
     Key? key,
     this.popupTitle,
@@ -109,6 +112,7 @@ class SelectionWidget<T> extends StatefulWidget {
     this.popupSelectionWidget,
     this.isMultiSelectionMode = false,
     this.popupValidationMultiSelectionWidget,
+    this.anyObject,
   }) : super(key: key);
 
   @override
@@ -593,10 +597,28 @@ class _SelectionWidgetState<T> extends State<SelectionWidget<T>> {
         if (widget.popupOnItemRemoved != null)
           widget.popupOnItemRemoved!(_selectedItems, newSelectedItem);
       } else {
-        _selectedItemsNotifier.value = List.from(_selectedItems)
-          ..add(newSelectedItem);
-        if (widget.popupOnItemAdded != null)
-          widget.popupOnItemAdded!(_selectedItems, newSelectedItem);
+        if (widget.anyObject == null) {
+          _selectedItemsNotifier.value = List.from(_selectedItems)
+            ..add(newSelectedItem);
+          if (widget.popupOnItemAdded != null)
+            widget.popupOnItemAdded!(_selectedItems, newSelectedItem);
+        } else {
+          if (newSelectedItem == widget.anyObject) {
+            _selectedItemsNotifier.value = List.from(_selectedItems)
+              ..add(newSelectedItem);
+
+            _selectedItemsNotifier.value = List.from(_selectedItems)
+              ..removeWhere((element) => element != widget.anyObject);
+          } else {
+            _selectedItemsNotifier.value = List.from(_selectedItems)
+              ..add(newSelectedItem);
+            if (_selectedItems.contains(widget.anyObject)) {
+              _selectedItemsNotifier.value = List.from(_selectedItems)
+                ..remove(widget.anyObject!);
+            }
+          }
+          setState(() {});
+        }
       }
     } else {
       Navigator.pop(context);
