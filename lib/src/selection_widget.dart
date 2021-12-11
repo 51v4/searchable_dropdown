@@ -607,31 +607,30 @@ class _SelectionWidgetState<T> extends State<SelectionWidget<T>> {
 
           _selectedItemsNotifier.value = List.from(_selectedItems)
             ..removeWhere((element) => element != widget.anyObject);
-        }
-
-        if (widget.noneObject == null && newSelectedItem == widget.noneObject) {
+        } else if (widget.noneObject == null &&
+            newSelectedItem == widget.noneObject) {
           _selectedItemsNotifier.value = List.from(_selectedItems)
             ..add(newSelectedItem);
 
           _selectedItemsNotifier.value = List.from(_selectedItems)
             ..removeWhere((element) => element != widget.noneObject);
-        }
-
-        _selectedItemsNotifier.value = List.from(_selectedItems)
-          ..add(newSelectedItem);
-
-        if (widget.anyObject == null &&
-            _selectedItems.contains(widget.anyObject)) {
+        } else {
           _selectedItemsNotifier.value = List.from(_selectedItems)
-            ..remove(widget.anyObject!);
+            ..add(newSelectedItem);
+
+          if (widget.anyObject == null &&
+              _selectedItems.contains(widget.anyObject)) {
+            _selectedItemsNotifier.value = List.from(_selectedItems)
+              ..remove(widget.anyObject!);
+          }
+          if (widget.noneObject == null &&
+              _selectedItems.contains(widget.noneObject)) {
+            _selectedItemsNotifier.value = List.from(_selectedItems)
+              ..remove(widget.noneObject!);
+          }
+          if (widget.popupOnItemAdded != null)
+            widget.popupOnItemAdded!(_selectedItems, newSelectedItem);
         }
-        if (widget.noneObject == null &&
-            _selectedItems.contains(widget.noneObject)) {
-          _selectedItemsNotifier.value = List.from(_selectedItems)
-            ..remove(widget.noneObject!);
-        }
-        if (widget.popupOnItemAdded != null)
-          widget.popupOnItemAdded!(_selectedItems, newSelectedItem);
 
         setState(() {});
 
