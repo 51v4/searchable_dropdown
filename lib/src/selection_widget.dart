@@ -77,6 +77,9 @@ class SelectionWidget<T> extends StatefulWidget {
 
   ///any object
   final T? anyObject;
+    
+  ///none object
+  final T? noneObject;
 
   const SelectionWidget({
     Key? key,
@@ -113,6 +116,7 @@ class SelectionWidget<T> extends StatefulWidget {
     this.isMultiSelectionMode = false,
     this.popupValidationMultiSelectionWidget,
     this.anyObject,
+    this.noneObject,
   }) : super(key: key);
 
   @override
