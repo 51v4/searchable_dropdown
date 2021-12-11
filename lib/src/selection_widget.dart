@@ -601,28 +601,62 @@ class _SelectionWidgetState<T> extends State<SelectionWidget<T>> {
         if (widget.popupOnItemRemoved != null)
           widget.popupOnItemRemoved!(_selectedItems, newSelectedItem);
       } else {
-        if (widget.anyObject == null) {
+        if (widget.anyObject == null && newSelectedItem == widget.anyObject) {
           _selectedItemsNotifier.value = List.from(_selectedItems)
             ..add(newSelectedItem);
-          if (widget.popupOnItemAdded != null)
-            widget.popupOnItemAdded!(_selectedItems, newSelectedItem);
-        } else {
-          if (newSelectedItem == widget.anyObject) {
-            _selectedItemsNotifier.value = List.from(_selectedItems)
-              ..add(newSelectedItem);
 
-            _selectedItemsNotifier.value = List.from(_selectedItems)
-              ..removeWhere((element) => element != widget.anyObject);
-          } else {
-            _selectedItemsNotifier.value = List.from(_selectedItems)
-              ..add(newSelectedItem);
-            if (_selectedItems.contains(widget.anyObject)) {
-              _selectedItemsNotifier.value = List.from(_selectedItems)
-                ..remove(widget.anyObject!);
-            }
-          }
-          setState(() {});
+          _selectedItemsNotifier.value = List.from(_selectedItems)
+            ..removeWhere((element) => element != widget.anyObject);
         }
+
+        if (widget.noneObject == null && newSelectedItem == widget.noneObject) {
+          _selectedItemsNotifier.value = List.from(_selectedItems)
+            ..add(newSelectedItem);
+
+          _selectedItemsNotifier.value = List.from(_selectedItems)
+            ..removeWhere((element) => element != widget.noneObject);
+        }
+
+        _selectedItemsNotifier.value = List.from(_selectedItems)
+          ..add(newSelectedItem);
+
+        if (widget.anyObject == null &&
+            _selectedItems.contains(widget.anyObject)) {
+          _selectedItemsNotifier.value = List.from(_selectedItems)
+            ..remove(widget.anyObject!);
+        }
+        if (widget.noneObject == null &&
+            _selectedItems.contains(widget.noneObject)) {
+          _selectedItemsNotifier.value = List.from(_selectedItems)
+            ..remove(widget.noneObject!);
+        }
+        if (widget.popupOnItemAdded != null)
+          widget.popupOnItemAdded!(_selectedItems, newSelectedItem);
+
+        setState(() {});
+
+        // if (widget.anyObject == null) {
+        //   _selectedItemsNotifier.value = List.from(_selectedItems)
+        //     ..add(newSelectedItem);
+        //   if (widget.popupOnItemAdded != null)
+        //     widget.popupOnItemAdded!(_selectedItems, newSelectedItem);
+        // } else {
+        //   if (newSelectedItem == widget.anyObject) {
+        //     _selectedItemsNotifier.value = List.from(_selectedItems)
+        //       ..add(newSelectedItem);
+
+        //     _selectedItemsNotifier.value = List.from(_selectedItems)
+        //       ..removeWhere((element) => element != widget.anyObject);
+        //   } else {
+        //     _selectedItemsNotifier.value = List.from(_selectedItems)
+        //       ..add(newSelectedItem);
+        //     if (_selectedItems.contains(widget.anyObject)) {
+        //       _selectedItemsNotifier.value = List.from(_selectedItems)
+        //         ..remove(widget.anyObject!);
+        //     }
+        //   }
+        //   setState(() {});
+        // }
       }
     } else {
       Navigator.pop(context);
