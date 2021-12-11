@@ -253,6 +253,9 @@ class DropdownSearch<T> extends StatefulWidget {
 
   ///any object
   final T? anyObject;
+    
+  ///none object
+  final T? noneObject;
 
   DropdownSearch({
     Key? key,
@@ -311,6 +314,7 @@ class DropdownSearch<T> extends StatefulWidget {
     this.dropdownSearchTextAlignVertical,
     this.popupElevation = 8,
     this.anyObject,
+    this.noneObject,
   })  : assert(!showSelectedItems || T == String || compareFn != null),
         this.searchFieldProps = searchFieldProps ?? TextFieldProps(),
         this.isMultiSelectionMode = false,
@@ -387,6 +391,7 @@ class DropdownSearch<T> extends StatefulWidget {
     this.popupValidationMultiSelectionWidget,
     this.popupElevation = 8,
     this.anyObject,
+    this.noneObject,
   })  : assert(!showSelectedItems || T == String || compareFn != null),
         this.searchFieldProps = searchFieldProps ?? TextFieldProps(),
         this.onChangedMultiSelection = onChange,
@@ -800,6 +805,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
           widget.popupValidationMultiSelectionWidget,
       isMultiSelectionMode: isMultiSelectionMode,
       anyObject: widget.anyObject,
+      noneObject: widget.noneObject,
     );
   }
 
