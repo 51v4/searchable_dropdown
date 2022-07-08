@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'src/modal_dialog.dart';
 import 'src/popupMenu.dart';
@@ -253,9 +252,12 @@ class DropdownSearch<T> extends StatefulWidget {
 
   ///any object
   final T? anyObject;
-    
+
   ///none object
   final T? noneObject;
+
+  /// closs button for bottom sheet mode
+  final bool hasCloseButton;
 
   DropdownSearch({
     Key? key,
@@ -315,6 +317,7 @@ class DropdownSearch<T> extends StatefulWidget {
     this.popupElevation = 8,
     this.anyObject,
     this.noneObject,
+    this.hasCloseButton = false,
   })  : assert(!showSelectedItems || T == String || compareFn != null),
         this.searchFieldProps = searchFieldProps ?? TextFieldProps(),
         this.isMultiSelectionMode = false,
@@ -392,6 +395,7 @@ class DropdownSearch<T> extends StatefulWidget {
     this.popupElevation = 8,
     this.anyObject,
     this.noneObject,
+    this.hasCloseButton = false,
   })  : assert(!showSelectedItems || T == String || compareFn != null),
         this.searchFieldProps = searchFieldProps ?? TextFieldProps(),
         this.onChangedMultiSelection = onChange,
@@ -433,7 +437,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
     List<T> newSelectedItems = isMultiSelectionMode
         ? widget.selectedItems
         : _itemToList(widget.selectedItem);
-    
+
     if (!listEquals(oldWidget.items, widget.items)) {
       if (!_selectedItemsNotifier.value
           .every((element) => widget.items?.contains(element) ?? false)) {
@@ -530,7 +534,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       initialValue: widget.selectedItem,
       builder: (FormFieldState<T> state) {
         if (state.value != getSelectedItem) {
-          WidgetsBinding.instance!.addPostFrameCallback((_) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
             state.didChange(getSelectedItem);
           });
         }
@@ -562,7 +566,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       initialValue: widget.selectedItems,
       builder: (FormFieldState<List<T>> state) {
         if (state.value != getSelectedItems) {
-          WidgetsBinding.instance!.addPostFrameCallback((_) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
             state.didChange(getSelectedItems);
           });
         }
@@ -695,6 +699,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
               bottom: MediaQuery.of(ctx).viewInsets.bottom,
             ),
             child: Stack(
+              clipBehavior: Clip.none,
               children: [
                 Container(
                   width: double.infinity,
@@ -725,7 +730,30 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
                     height: widget.popupSafeArea.top ? padding.top : 0,
                     width: double.infinity,
                   ),
-                )
+                ),
+                Positioned(
+                  top: -20,
+                  right: 20,
+                  child: Visibility(
+                    visible: widget.hasCloseButton,
+                    child: GestureDetector(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xff959595),
+                        ),
+                        child: const Icon(
+                          Icons.close_rounded,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           );

@@ -267,6 +267,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     topRight: Radius.circular(24),
                   ),
                 ),
+                hasCloseButton: true,
               ),
               Divider(),
 
