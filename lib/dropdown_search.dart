@@ -259,6 +259,9 @@ class DropdownSearch<T> extends StatefulWidget {
   /// closs button for bottom sheet mode
   final bool hasCloseButton;
 
+  /// color of closs button for bottom sheet mode
+  final Color? closeButtonColor;
+
   DropdownSearch({
     Key? key,
     this.onSaved,
@@ -318,6 +321,7 @@ class DropdownSearch<T> extends StatefulWidget {
     this.anyObject,
     this.noneObject,
     this.hasCloseButton = false,
+    this.closeButtonColor,
   })  : assert(!showSelectedItems || T == String || compareFn != null),
         this.searchFieldProps = searchFieldProps ?? TextFieldProps(),
         this.isMultiSelectionMode = false,
@@ -396,6 +400,7 @@ class DropdownSearch<T> extends StatefulWidget {
     this.anyObject,
     this.noneObject,
     this.hasCloseButton = false,
+    this.closeButtonColor,
   })  : assert(!showSelectedItems || T == String || compareFn != null),
         this.searchFieldProps = searchFieldProps ?? TextFieldProps(),
         this.onChangedMultiSelection = onChange,
@@ -741,9 +746,9 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
                       child: Container(
                         width: 40,
                         height: 40,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color(0xff959595),
+                          color: widget.closeButtonColor ?? Color(0xffC2C2C2),
                         ),
                         child: const Icon(
                           Icons.close_rounded,
