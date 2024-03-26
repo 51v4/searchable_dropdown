@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'src/modal_dialog.dart';
 import 'src/popupMenu.dart';
@@ -253,7 +252,7 @@ class DropdownSearch<T> extends StatefulWidget {
 
   ///any object
   final T? anyObject;
-    
+
   ///none object
   final T? noneObject;
 
@@ -433,7 +432,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
     List<T> newSelectedItems = isMultiSelectionMode
         ? widget.selectedItems
         : _itemToList(widget.selectedItem);
-    
+
     if (!listEquals(oldWidget.items, widget.items)) {
       if (!_selectedItemsNotifier.value
           .every((element) => widget.items?.contains(element) ?? false)) {
@@ -479,7 +478,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
         child: Text(
           _selectedItemAsString(item),
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.subtitle2,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
       );
     }
@@ -503,7 +502,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
         );
       }
       return Text(_selectedItemAsString(getSelectedItem),
-          style: Theme.of(context).textTheme.subtitle1);
+          style: Theme.of(context).textTheme.titleMedium);
     }
 
     return Row(
@@ -530,7 +529,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       initialValue: widget.selectedItem,
       builder: (FormFieldState<T> state) {
         if (state.value != getSelectedItem) {
-          WidgetsBinding.instance!.addPostFrameCallback((_) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
             state.didChange(getSelectedItem);
           });
         }
@@ -562,7 +561,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       initialValue: widget.selectedItems,
       builder: (FormFieldState<List<T>> state) {
         if (state.value != getSelectedItems) {
-          WidgetsBinding.instance!.addPostFrameCallback((_) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
             state.didChange(getSelectedItems);
           });
         }
@@ -738,7 +737,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
     final RenderBox popupButtonObject = context.findRenderObject() as RenderBox;
     // Get the render object of the overlay used in `Navigator` / `MaterialApp`, i.e. screen size reference
     final RenderBox overlay =
-        Overlay.of(context)!.context.findRenderObject() as RenderBox;
+        Overlay.of(context).context.findRenderObject() as RenderBox;
     // Calculate the show-up area for the dropdown using button's size & position based on the `overlay` used as the coordinate space.
     final RelativeRect position = RelativeRect.fromSize(
       Rect.fromPoints(

@@ -4,9 +4,8 @@ import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import './scrollbar_props.dart';
-import './text_field_props.dart';
 import '../dropdown_search.dart';
+
 import 'checkbox_widget.dart';
 
 class SelectionWidget<T> extends StatefulWidget {
@@ -77,7 +76,7 @@ class SelectionWidget<T> extends StatefulWidget {
 
   ///any object
   final T? anyObject;
-    
+
   ///none object
   final T? noneObject;
 
@@ -203,10 +202,10 @@ class _SelectionWidgetState<T> extends State<SelectionWidget<T>> {
                       context: context,
                       child: Scrollbar(
                         controller: widget.scrollbarProps?.controller,
-                        isAlwaysShown: widget.scrollbarProps?.isAlwaysShown,
-                        showTrackOnHover:
-                            widget.scrollbarProps?.showTrackOnHover,
-                        hoverThickness: widget.scrollbarProps?.hoverThickness,
+                        // isAlwaysShown: widget.scrollbarProps?.isAlwaysShown,
+                        // showTrackOnHover:
+                        //     widget.scrollbarProps?.showTrackOnHover,
+                        // hoverThickness: widget.scrollbarProps?.hoverThickness,
                         thickness: widget.scrollbarProps?.thickness,
                         radius: widget.scrollbarProps?.radius,
                         notificationPredicate:
@@ -494,7 +493,7 @@ class _SelectionWidgetState<T> extends State<SelectionWidget<T>> {
                 textAlignVertical: widget.searchFieldProps?.textAlignVertical,
                 textDirection: widget.searchFieldProps?.textDirection,
                 readOnly: widget.searchFieldProps?.readOnly ?? false,
-                toolbarOptions: widget.searchFieldProps?.toolbarOptions,
+                // toolbarOptions: widget.searchFieldProps?.toolbarOptions,
                 showCursor: widget.searchFieldProps?.showCursor,
                 obscuringCharacter:
                     widget.searchFieldProps?.obscuringCharacter ?? '•',
@@ -673,7 +672,7 @@ class _SelectionWidgetState<T> extends State<SelectionWidget<T>> {
       child: Text(
         _selectedItemAsString(item),
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.subtitle1,
+        style: Theme.of(context).textTheme.titleMedium,
       ),
     );
   }

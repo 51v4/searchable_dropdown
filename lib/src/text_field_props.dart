@@ -1,9 +1,8 @@
 import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
+
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TextFieldProps {
   TextFieldProps({
@@ -18,7 +17,7 @@ class TextFieldProps {
     this.textAlignVertical,
     this.textDirection,
     this.readOnly = false,
-    this.toolbarOptions,
+    // this.toolbarOptions,
     this.showCursor,
     this.autofocus = false,
     this.obscuringCharacter = '•',
@@ -61,7 +60,7 @@ class TextFieldProps {
 
   final SmartQuotesType? smartQuotesType;
 
-  final ToolbarOptions? toolbarOptions;
+  // final ToolbarOptions? toolbarOptions;
 
   final InputDecoration? decoration;
 

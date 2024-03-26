@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 import './popup_safearea.dart';
 
@@ -190,7 +189,7 @@ class PopupMenuItemState<T, W extends CustomPopupMenuItem<T>> extends State<W> {
     final PopupMenuThemeData popupMenuTheme = PopupMenuTheme.of(context);
     TextStyle? style = widget.textStyle ??
         popupMenuTheme.textStyle ??
-        theme.textTheme.subtitle1;
+        theme.textTheme.titleMedium;
 
     Widget item = AnimatedDefaultTextStyle(
       style: style!,
