@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../dropdown_search.dart';
+
 import 'checkbox_widget.dart';
 
 class SelectionWidget<T> extends StatefulWidget {
@@ -491,7 +492,7 @@ class _SelectionWidgetState<T> extends State<SelectionWidget<T>> {
                 textAlignVertical: widget.searchFieldProps?.textAlignVertical,
                 textDirection: widget.searchFieldProps?.textDirection,
                 readOnly: widget.searchFieldProps?.readOnly ?? false,
-                toolbarOptions: widget.searchFieldProps?.toolbarOptions,
+                // toolbarOptions: widget.searchFieldProps?.toolbarOptions,
                 showCursor: widget.searchFieldProps?.showCursor,
                 obscuringCharacter:
                     widget.searchFieldProps?.obscuringCharacter ?? '•',
@@ -670,7 +671,7 @@ class _SelectionWidgetState<T> extends State<SelectionWidget<T>> {
       child: Text(
         _selectedItemAsString(item),
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.subtitle1,
+        style: Theme.of(context).textTheme.bodyLarge,
       ),
     );
   }
